@@ -19,7 +19,7 @@ if ! docker compose version &> /dev/null; then
 fi
 
 # Clonar el repositorio si no existe
-REPO_URL="TU_REPO_CLIENTE"
+REPO_URL="https://github.com/XxSebasx/clientewebcinefilo"
 DIR="clienteweb-main"
 
 if [ ! -d "$DIR" ]; then
