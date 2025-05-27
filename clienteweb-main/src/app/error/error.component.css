@@ -1,0 +1,23 @@
+#cuerpo{
+    color: #721c24;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    justify-content: center;
+
+
+}
+
+
+.error-image{
+    width: 35em;
+    height: 35em;
+}
+
+
+h1{
+    color: #f3f3f3;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0;
+}

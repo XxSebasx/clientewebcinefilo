@@ -1,0 +1,100 @@
+/* Estilos generales */
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #121212;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Contenedor principal */
+.about-container {
+  max-width: min(90%, 800px);
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem);
+  box-sizing: border-box;
+}
+
+/* Logo */
+.about-logo {
+  width: clamp(60px, 10vw, 80px);
+  height: clamp(60px, 10vw, 80px);
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Título principal */
+.about-title {
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e50914;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  text-align: center;
+}
+
+/* Contenido */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Secciones */
+.about-section {
+  background-color: rgba(30, 30, 30, 0.7);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Subtítulos */
+.about-subtitle {
+  color: #e50914;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+/* Párrafos */
+.about-section p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  color: #f0f0f0;
+  text-align: left;
+}
+
+/* Último párrafo sin margen inferior */
+.about-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Elementos enfatizados */
+em {
+  color: #e50914;
+  font-style: italic;
+}
+
+strong {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Media Queries para ajustes específicos */
+@media (max-width: 600px) {
+  .about-container {
+    padding: 1rem;
+  }
+  
+  .about-section {
+    padding: 1rem;
+  }
+  
+  .about-section p {
+    text-align: justify;
+    hyphens: auto;
+  }
+}

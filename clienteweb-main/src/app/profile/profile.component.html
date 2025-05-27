@@ -1,0 +1,141 @@
+<app-navbar></app-navbar>
+
+<section class="profile-section">
+  <div class="profile-container">
+    <div class="profile-card">
+      <!-- Cabecera con imagen de fondo -->
+      <div class="profile-header" [style.backgroundImage]="'url(' + (user.imagenCabecera || 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') + ')'">
+        <button class="change-header-btn" (click)="triggerFileInput('cabecera')" *ngIf="modoEdicion">
+          <i class="bi bi-camera"></i> Cambiar cabecera
+        </button>
+        <input type="file" id="cabeceraInput" style="display: none;" (change)="onFileSelected($event, 'cabecera')">
+      </div>
+
+      <!-- Imagen de perfil centrada -->
+      <div class="profile-picture-wrapper">
+        <div class="profile-img-container profile-centered">
+          <img [src]="user.imagenPerfil || 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp'" alt="Foto de perfil" class="profile-img">
+          <button class="change-photo-btn" *ngIf="modoEdicion" (click)="triggerFileInput('perfil')">
+            <i class="bi bi-camera-fill"></i>
+          </button>
+          <input type="file" id="perfilInput" style="display: none;" (change)="onFileSelected($event, 'perfil')">
+        </div>
+        <button class="edit-btn" (click)="activarEdicion()" *ngIf="esPerfilPropio && !modoEdicion">
+          <i class="bi bi-pencil"></i> Editar perfil
+        </button>
+      </div>
+
+      <div class="profile-body">
+        <!-- Primera fila: Datos principales -->
+        <div class="profile-main-row">
+          <div class="profile-main-data">
+            <!-- Nombre -->
+            <div class="form-group">
+              <label>Nombre</label>
+              <ng-container *ngIf="!modoEdicion; else editNombre">
+                <p class="profile-data">{{ user.nombre || 'No especificado' }}</p>
+              </ng-container>
+              <ng-template #editNombre>
+                <input class="profile-input" type="text" placeholder="Nombre" [(ngModel)]="user.nombre" name="nombre"/>
+              </ng-template>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label>Email</label>
+              <ng-container *ngIf="!modoEdicion; else editEmail">
+                <p class="profile-data">{{ user.email || 'No especificado' }}</p>
+              </ng-container>
+              <ng-template #editEmail>
+                <input class="profile-input" type="text" placeholder="Email" [(ngModel)]="user.email" name="email"/>
+              </ng-template>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="form-group">
+              <label>Contraseña</label>
+              <ng-container *ngIf="!modoEdicion; else editPassword">
+                <p class="profile-data">••••••••</p>
+              </ng-container>
+              <ng-template #editPassword>
+                <div class="password-input">
+                  <input class="profile-input" [type]="mostrarPassword ? 'text' : 'password'" placeholder="Contraseña" [(ngModel)]="user.password" name="password"/>
+                  <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+                    <i [class]="mostrarPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+
+            <!-- Acciones de edición -->
+            <div *ngIf="modoEdicion">
+              <div class="form-actions">
+                <button class="save-btn" 
+                        [class.verify-mode]="codigoEnviado"
+                        (click)="codigoEnviado ? verificarCodigo() : guardarCambios()"
+                        [disabled]="enviandoCodigo">
+                  <span *ngIf="!codigoEnviado; else verifyText">
+                    <i class="bi bi-save"></i> Guardar cambios
+                  </span>
+                  <ng-template #verifyText>
+                    <i class="bi bi-shield-check"></i> Verificar código
+                  </ng-template>
+                </button>
+
+                <button class="cancel-btn" (click)="desactivarEdicion()">
+                  <i class="bi bi-x"></i> Cancelar
+                </button>
+              </div>
+
+              <!-- Código de verificación -->
+              <div *ngIf="codigoEnviado" class="verification-code">
+                <input type="text" class="profile-input"
+                       [(ngModel)]="codigoVerificacion"
+                       name="codigoVerificacion"
+                       placeholder="Código de verificación"
+                       required>
+                <p class="verification-message">
+                  <i class="bi bi-envelope"></i> Código enviado a {{ user.email }}
+                </p>
+              </div>
+
+              <!-- Mensaje de carga -->
+              <div *ngIf="enviandoCodigo" class="loading-message">
+                <i class="bi bi-hourglass"></i> Enviando código...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segunda fila: Información adicional -->
+        <div class="profile-info-row">
+          <div class="info-card">
+            <i class="bi bi-person-badge"></i>
+            <div>
+              <h3>Rol</h3>
+              <p>{{ user.rol || 'No especificado' }}</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="bi bi-check-circle"></i>
+            <div>
+              <h3>Estado</h3>
+              <p>{{ user.estado || 'No especificado' }}</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="bi bi-calendar"></i>
+            <div>
+              <h3>Miembro desde</h3>
+              <p>{{ user.fecha ? (user.fecha | date: 'dd/MM/yyyy') : 'No especificado' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

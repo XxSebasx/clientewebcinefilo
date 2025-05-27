@@ -1,0 +1,262 @@
+/* Estilos generales */
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #121212;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+.movie-form-container {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.movie-form {
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-title {
+  color: #fff;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: #e50914;
+  border-radius: 2px;
+}
+
+/* Vista de la película */
+.movie-view {
+  margin-top: 1.5rem;
+}
+
+.view-title {
+  color: #e50914;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.movie-poster-container {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.movie-poster {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1rem;
+  border: 2px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.movie-poster:hover {
+  transform: scale(1.02);
+}
+
+.upload-controls {
+  margin-top: 1rem;
+}
+
+.btn-outline-secondary {
+  border-color: #e50914;
+  color: #e50914;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #e50914;
+  color: white;
+}
+
+.text-muted {
+  color: #aaa !important;
+}
+
+.movie-details {
+  padding: 0 0.5rem;
+}
+
+/* Sección de enlaces */
+.links-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #252525;
+  border-radius: 8px;
+  border-left: 4px solid #e50914;
+}
+
+.links-section h4 {
+  margin-bottom: 1.2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.link-form {
+  margin-bottom: 1rem;
+}
+
+/* Formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #ddd;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background-color: #252525;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #e50914;
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Botones */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-success {
+  background-color: #e50914;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #f40612;
+}
+
+.btn-danger {
+  background-color: #333;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #444;
+}
+
+.btn-outline-primary {
+  border: 2px solid #e50914;
+  color: #e50914;
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: #e50914;
+  color: white;
+}
+
+/* Errores */
+.text-danger {
+  color: #ff6b6b !important;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movie-form {
+    padding: 1.5rem;
+  }
+  
+  .form-title {
+    font-size: 1.8rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .movie-form {
+    padding: 1rem;
+  }
+  
+  .form-title {
+    font-size: 1.5rem;
+  }
+  
+  .view-title {
+    font-size: 1.3rem;
+  }
+  
+  .link-form .row > div {
+    margin-bottom: 0.5rem;
+  }
+  
+  .link-form .row > div:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Placeholder blanco */
+.form-control::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
+}

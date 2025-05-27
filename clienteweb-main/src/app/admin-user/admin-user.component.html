@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+
+<div class="admin-user-container">
+  <form class="admin-user-form" novalidate>
+    <h2 class="title">Buscar usuario</h2>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nombre de usuario"
+        [(ngModel)]="nombreUsuario"
+        name="nombreUsuario"
+      />
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary w-100"
+      (click)="buscarUsuario()"
+    >
+      Buscar
+    </button>
+
+    <div *ngIf="usuario" class="user-profile">
+      <h2 class="title">Perfil de usuario</h2>
+      <div class="user-info">
+        <img
+          [src]="usuario.imagenPerfil || 'recursos/perfil.jpg'"
+          alt="Foto de perfil"
+          class="user-image"
+        />
+        <div class="user-details">
+          <p><strong>{{ usuario.nombre }}</strong></p>
+          <p>{{ formatDate(usuario.fecha) }}</p>
+          <p>{{ usuario.email }}</p>
+          <p>{{ usuario.rol }}</p>
+          <p>{{ usuario.estado }}</p>
+        </div>
+      </div>
+
+      <h2 class="title">Opciones</h2>
+      <div class="user-options">
+        <div class="form-group">
+          <select
+            class="form-control"
+            [(ngModel)]="nuevoRol"
+            name="nuevoRol"
+          >
+            <option selected disabled value="">--Seleccionar rol--</option>
+            <option value="estandar">Usuario</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary w-100"
+          (click)="cambiarRol()"
+        >
+          Cambiar rol
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning w-100 mt-2"
+          (click)="cambiarEstado()"
+        >
+          Activar/Desactivar cuenta
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger w-100 mt-2"
+          (click)="eliminarUsuario()"
+        >
+          Eliminar usuario
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>

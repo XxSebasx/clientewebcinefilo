@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+
+<div class="reports-container">
+  <!-- Barra de búsqueda mejorada -->
+  <div class="search-bar">
+    <div class="search-input-container">
+      <input id="filtro" type="text" placeholder="Buscar por usuario reportado..." [(ngModel)]="textoFiltro"
+        (keyup.enter)="filtrarReportes()" class="search-input" />
+      <button class="search-btn" (click)="filtrarReportes()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de reportes -->
+  <div class="reports-list">
+    <div class="report-card" *ngFor="let reporte of reportes">
+      <!-- Usuario que reporta -->
+      <div class="report-section user-section">
+        <h5 class="section-title">Usuario que reporta</h5>
+        <div class="user-info" (click)="verPerfil(reporte.Usuario)">
+          <img [src]="reporte.Usuario?.imagenPerfil || 'recursos/perfil.jpg'" alt="Usuario" class="user-avatar">
+          <p class="user-name">{{ reporte.Usuario?.nombre || 'Usuario desconocido' }}</p>
+        </div>
+      </div>
+
+      <!-- Motivo del reporte -->
+      <div class="report-section reason-section">
+        <h5 class="section-title">Motivo del reporte</h5>
+        <p class="report-text">{{ reporte.motivo }}</p>
+      </div>
+
+      <!-- Comentario reportado -->
+      <div class="report-section comment-section">
+        <h5 class="section-title">Comentario reportado</h5>
+        <div class="reported-comment" (click)="verPerfil(reporte.comentario?.Usuario)">
+          <img [src]="reporte.comentario?.Usuario?.imagenPerfil || 'recursos/perfil.jpg'" alt="Usuario"
+            class="user-avatar">
+          <div class="comment-info">
+            <p class="user-name">{{ reporte.comentario?.Usuario?.nombre || 'Usuario desconocido' }}</p>
+            <p class="comment-text">{{ reporte.comentario?.texto || 'Comentario no disponible' }}</p>
+            <!-- En la parte del template donde está el botón de borrar -->
+            <button *ngIf="usuario?.rol === 'admin'" class="delete-btn"
+              (click)="eliminarComentario(reporte.comentario?.ID)">
+              <i class="bi bi-trash"></i> Eliminar comentario
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

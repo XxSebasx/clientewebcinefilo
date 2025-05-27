@@ -1,0 +1,82 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-brand">
+      <img src="recursos/marca.png" alt="Logo">
+    </a>
+
+    <!-- Menú Hamburguesa -->
+    <button class="hamburger-btn" (click)="toggleMobileMenu()" *ngIf="showMobileMenuButton">
+      <i class="bi" [class.bi-list]="!isMobileMenuOpen" [class.bi-x]="isMobileMenuOpen"></i>
+    </button>
+
+    <!-- Menú principal -->
+    <ul class="navbar-nav">
+      <li><a routerLink="/catalog" class="nav-link">CATÁLOGO</a></li>
+      <li><a routerLink="/about" class="nav-link">SOBRE NOSOTROS</a></li>
+      <li><a routerLink="/contact" class="nav-link">CONTACTO</a></li>
+    </ul>
+
+    <!-- Barra de búsqueda -->
+    <form class="search-form" role="search">
+      <input
+        type="search"
+        class="search-input"
+        placeholder="Buscar películas..."
+        aria-label="Search"
+        [(ngModel)]="searchQuery"
+        name="searchQuery"
+        (keydown)="onSearch($event)"
+      />
+    </form>
+
+    <!-- Menú de usuario -->
+    <div class="user-menu">
+      <img 
+        [src]="userProfileImage" 
+        alt="User" 
+        class="user-avatar"
+        (click)="toggleMenu()"
+      >
+
+      <ul class="dropdown-menu" [class.show]="isMenuOpen">
+        <li *ngIf="!isLoggedIn"><a routerLink="/register" class="dropdown-item">Registrarse</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login" class="dropdown-item">Iniciar sesión</a></li>
+        
+        <li *ngIf="isLoggedIn">
+          <a routerLink="/profile" class="dropdown-item">Ver perfil</a>
+        </li>
+        <li *ngIf="isLoggedIn && userRole === 'admin'">
+          <a routerLink="/admin" class="dropdown-item">Panel de Admin</a>
+        </li>
+        <li *ngIf="isLoggedIn">
+          <div class="dropdown-divider"></div>
+          <a (click)="logout()" class="dropdown-item">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Menú móvil (modal) -->
+  <div class="mobile-menu-overlay" [class.active]="isMobileMenuOpen" (click)="toggleMobileMenu()"></div>
+  
+  <div class="mobile-menu" [class.active]="isMobileMenuOpen">
+    <ul class="mobile-nav">
+      <li><a routerLink="/catalog" class="mobile-nav-link" (click)="toggleMobileMenu()">CATÁLOGO</a></li>
+      <li><a routerLink="/about" class="mobile-nav-link" (click)="toggleMobileMenu()">SOBRE NOSOTROS</a></li>
+      <li><a routerLink="/contact" class="mobile-nav-link" (click)="toggleMobileMenu()">CONTACTO</a></li>
+    </ul>
+    
+    <form class="mobile-search-form" role="search">
+      <input
+        type="search"
+        class="mobile-search-input"
+        placeholder="Buscar películas..."
+        aria-label="Search"
+        [(ngModel)]="searchQuery"
+        name="searchQuery"
+        (keydown)="onSearch($event)"
+      />
+    </form>
+  </div>
+</nav>

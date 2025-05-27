@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+
+<div class="admin-dashboard">
+  <h1 class="dashboard-title">Panel de Administración</h1>
+  
+  <div class="dashboard-grid">
+    <div class="dashboard-card" routerLink="/admin-user">
+      <div class="card-icon">
+        <img src="recursos/admin_profile_icon.png" alt="Usuarios">
+      </div>
+      <h2>Gestión de Usuarios</h2>
+      <p>Administra los usuarios registrados</p>
+    </div>
+    
+    <div class="dashboard-card" routerLink="/admin-movie">
+      <div class="card-icon">
+        <img src="recursos/admin_movie_icon.png" alt="Películas">
+      </div>
+      <h2>Gestión de Películas</h2>
+      <p>Administra el catálogo de películas</p>
+    </div>
+    
+    <div class="dashboard-card" routerLink="/reports">
+      <div class="card-icon">
+        <img src="recursos/admin_reports_icon.png" alt="Reportes">
+      </div>
+      <h2>Reportes</h2>
+      <p>Revisa y gestiona los reportes</p>
+    </div>
+    
+    <div class="dashboard-card" routerLink="/messages">
+      <div class="card-icon">
+        <img src="recursos/mensajes.png" alt="Mensajes">
+      </div>
+      <h2>Mensajes de Soporte</h2>
+      <p>Gestiona los mensajes recibidos</p>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

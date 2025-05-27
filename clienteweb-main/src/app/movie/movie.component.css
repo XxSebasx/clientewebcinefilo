@@ -1,0 +1,641 @@
+/* Estilos base coherentes con la aplicación */
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #121212;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+.movie-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Layout principal */
+.movie-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .movie-main-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* Columna del poster */
+.movie-poster-column {
+  flex: 0 0 40%;
+  max-width: 400px;
+  position: relative;
+}
+
+.movie-poster-container {
+  position: sticky;
+  top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.movie-poster-container:hover {
+  transform: translateY(-5px);
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.movie-rating {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  backdrop-filter: blur(5px);
+}
+
+.rating-value {
+  font-size: 1.2rem;
+  color: #ffc107;
+}
+
+.rating-max {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0 0.3rem;
+}
+
+.rating-star {
+  width: 16px;
+  height: 16px;
+}
+
+/* Columna de información */
+.movie-info-column {
+  flex: 1;
+  padding-left: 2rem;
+}
+
+.movie-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+.movie-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background-color: #e50914;
+  border-radius: 2px;
+}
+
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #aaa;
+}
+
+.movie-meta span {
+  display: flex;
+  align-items: center;
+}
+
+.movie-meta span:not(:last-child)::after {
+  content: "•";
+  margin-left: 1rem;
+  color: #666;
+}
+
+.movie-synopsis h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: #fff;
+}
+
+.movie-synopsis p {
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+/* Sección de plataformas */
+.movie-platforms {
+  margin-top: 2rem;
+}
+
+.movie-platforms h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.platforms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.platform-link {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  width: fit-content;
+  background-color: #333;
+}
+
+.platform-link:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.platform-logo {
+  width: 25px;
+  height: 25px;
+  margin-right: 12px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+/* Sección de trailer compacto */
+.movie-trailer-section {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.movie-trailer-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.compact-trailer {
+  position: relative;
+  padding-bottom: 40%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 700px;
+}
+
+.compact-trailer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Sección de comentarios */
+.movie-comments {
+  margin-top: 3rem;
+}
+
+.movie-comments h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+
+.comment-form {
+  background-color: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid #333;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #333;
+  border-radius: 6px;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  margin-bottom: 1rem;
+  background-color: #2a2a2a;
+  color: white;
+}
+
+.comment-form textarea::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.comment-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating-control {
+  display: flex;
+  align-items: center;
+}
+
+.rating-control label {
+  margin-right: 0.8rem;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.rating-control select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 2px solid #333;
+  background-color: #2a2a2a;
+  color: white;
+}
+
+.submit-btn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.submit-btn:hover {
+  background-color: #f40612;
+  transform: translateY(-2px);
+}
+
+.submit-btn i {
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover i {
+  transform: translateX(3px);
+}
+
+.auth-prompt {
+  text-align: center;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid #333;
+}
+
+.auth-prompt p {
+  margin-bottom: 1.5rem;
+  color: #ccc;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.login-btn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #f40612;
+  transform: translateY(-2px);
+}
+
+.register-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comment-card {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.comment-card:hover {
+  transform: translateY(-3px);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+  cursor: pointer;
+  border: 2px solid #333;
+  transition: border-color 0.3s ease;
+}
+
+.user-avatar:hover {
+  border-color: #e50914;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.username {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.username:hover {
+  color: #e50914;
+}
+
+.user-rating {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 500;
+  width: fit-content;
+  color: #ffc107;
+}
+
+.user-rating span {
+  margin-right: 0.3rem;
+}
+
+.star-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.comment-content {
+  position: relative;
+}
+
+.comment-content p {
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.report-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s;
+}
+
+.report-btn:hover {
+  color: #e50914;
+  text-decoration: underline;
+}
+
+/* Modales */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-container {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #e50914;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-body textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #333;
+  border-radius: 6px;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  background-color: #2a2a2a;
+  color: white;
+}
+
+.modal-body textarea::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #333;
+  gap: 1rem;
+}
+
+.cancel-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movie-main-content {
+    flex-direction: column;
+  }
+  
+  .movie-poster-column {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .movie-info-column {
+    padding-left: 0;
+  }
+  
+  .compact-trailer {
+    padding-bottom: 56.25%;
+  }
+  
+  .platform-link {
+    width: 100%;
+  }
+  
+  .auth-buttons {
+    flex-direction: column;
+  }
+  
+  .login-btn, .register-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-title {
+    font-size: 2rem;
+  }
+  
+  .movie-meta {
+    font-size: 1rem;
+  }
+  
+  .comment-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .rating-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+/* Agrega esto al archivo CSS */
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.delete-btn:hover {
+  background-color: rgba(255, 68, 68, 0.1);
+  text-decoration: underline;
+}
+
+.delete-btn i {
+  font-size: 0.9rem;
+}
+

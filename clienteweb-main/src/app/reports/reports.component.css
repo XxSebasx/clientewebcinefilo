@@ -1,0 +1,246 @@
+/* Estilos generales */
+.reports-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.search-input-container {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 3rem;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 2px 12px rgba(74, 144, 226, 0.2);
+}
+
+.search-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.search-btn:hover {
+  color: #4a90e2;
+}
+
+/* Lista de reportes */
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.report-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Secciones del reporte */
+.report-section {
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.report-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Estilos de usuario */
+.user-info, .reported-comment {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.user-info:hover, .reported-comment:hover {
+  background-color: #f5f5f5;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eee;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+/* Texto del reporte y comentario */
+.report-text {
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.comment-info {
+  flex: 1;
+}
+
+.comment-text {
+  color: #666;
+  margin: 0.5rem 0 0;
+  padding: 0.75rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  line-height: 1.4;
+}
+
+.delete-comment-btn {
+  background: none;
+  border: none;
+  color: #e50914;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.delete-comment-btn:hover {
+  color: #b0060f;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .report-card {
+    flex-direction: column;
+  }
+  
+  .report-section {
+    padding: 1.25rem;
+  }
+  
+  .user-avatar {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  .reports-container {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .search-input {
+    padding: 0.65rem 1rem;
+    padding-right: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 1rem;
+  }
+  
+  .user-name, .report-text, .comment-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-input-container {
+    max-width: 100%;
+  }
+  
+  .user-info, .reported-comment {
+    gap: 0.75rem;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .report-section {
+    padding: 1rem;
+  }
+}
+
+
+/* Agrega esto al archivo CSS */
+.delete-btn {
+  background-color: #fff;
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-top: 0.75rem;
+  font-weight: 500;
+}
+
+.delete-btn:hover {
+  background-color: #ff4444;
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+}
+
+.delete-btn i {
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.delete-btn:hover i {
+  transform: scale(1.1);
+}
+
+/* Para mantener la alineación con el contenido del comentario */
+.comment-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

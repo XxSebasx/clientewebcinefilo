@@ -1,0 +1,103 @@
+/* Estilos generales */
+.messages-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: white;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Lista de mensajes */
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message-card {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border-left: 4px solid #4a90e2;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sender-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sender-name {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.sender-email {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.message-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.message-date {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.message-subject {
+  font-weight: 500;
+  color: #4a90e2;
+}
+
+.message-content {
+  color: #ccc;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .message-header {
+    flex-direction: column;
+  }
+  
+  .message-meta {
+    align-items: flex-start;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .messages-container {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}

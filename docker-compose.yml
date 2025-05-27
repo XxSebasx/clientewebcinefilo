@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  cliente:
+    build: ./clienteweb-main
+    ports:
+      - "4200:80"
+    networks:
+      custom_net:
+        ipv4_address: 172.20.0.20
+
+networks:
+  custom_net:
+    external: true

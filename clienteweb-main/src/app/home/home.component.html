@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+
+<!-- Hero Section -->
+<header class="hero-header">
+  <div class="hero-image" style="background-image: url('cabeceraHome.png')"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Bienvenido al rincón del cinéfilo</h1>
+    <h4 class="hero-subtitle">Donde están las mejores pelis</h4>
+    <a class="btn btn-outline-light btn-lg" role="button" routerLink="/movies">
+      Explora nuestras películas
+    </a>
+  </div>
+</header>
+
+<!-- Carrusel: Mejor valoradas -->
+<div class="carousel-container">
+  <h3 class="carousel-title">Mejor valoradas</h3>
+  <div class="carousel">
+    <img *ngIf="paginaActual > 0" src="recursos/flecha_peliculas.png" alt="Retroceder" class="carousel-arrow left" (click)="retroceder()">
+    
+    <div class="carousel-wrapper">
+      <div class="carousel-slides" [style.transform]="'translateX(' + (-paginaActual * 100) + '%)'">
+        <div class="movie-card" *ngFor="let pelicula of peliculasValoradas" (click)="verPelicula(pelicula.ID)">
+          <img [src]="pelicula.portada || 'assets/placeholder-image.png'" [alt]="pelicula.titulo" class="movie-poster">
+          <div class="movie-info">
+            <h2 class="movie-title">{{ pelicula.titulo }}</h2>
+            <span class="movie-genre">{{ pelicula.genero }}</span>
+            <span class="movie-year">{{ pelicula.anio_estreno | date: 'yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <img *ngIf="paginaActual < totalPaginas - 1" src="recursos/flecha_derecha.png" alt="Avanzar" class="carousel-arrow right" (click)="avanzar()">
+  </div>
+</div>
+
+<!-- Carrusel: Más populares -->
+<div class="carousel-container">
+  <h3 class="carousel-title">Más populares</h3>
+  <div class="carousel">
+    <img *ngIf="paginaActualPopulares > 0" src="recursos/flecha_peliculas.png" alt="Retroceder" class="carousel-arrow left" (click)="retrocederPopulares()">
+    
+    <div class="carousel-wrapper">
+      <div class="carousel-slides" [style.transform]="'translateX(' + (-paginaActualPopulares * 100) + '%)'">
+        <div class="movie-card" *ngFor="let pelicula of peliculasPopulares" (click)="verPelicula(pelicula.ID)">
+          <img [src]="pelicula.portada || 'assets/placeholder-image.png'" [alt]="pelicula.titulo" class="movie-poster">
+          <div class="movie-info">
+            <h2 class="movie-title">{{ pelicula.titulo }}</h2>
+            <span class="movie-genre">{{ pelicula.genero }}</span>
+            <span class="movie-year">{{ pelicula.anio_estreno | date: 'yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <img *ngIf="paginaActualPopulares < totalPaginas - 1" src="recursos/flecha_derecha.png" alt="Avanzar" class="carousel-arrow right" (click)="avanzarPopulares()">
+  </div>
+</div>
+
+<!-- Carrusel: Estrenos -->
+<div class="carousel-container">
+  <h3 class="carousel-title">Estrenos</h3>
+  <div class="carousel">
+    <img *ngIf="paginaActualEstrenos > 0" src="recursos/flecha_peliculas.png" alt="Retroceder" class="carousel-arrow left" (click)="retrocederEstrenos()">
+    
+    <div class="carousel-wrapper">
+      <div class="carousel-slides" [style.transform]="'translateX(' + (-paginaActualEstrenos * 100) + '%)'">
+        <div class="movie-card" *ngFor="let pelicula of peliculasEstrenos" (click)="verPelicula(pelicula.ID)">
+          <img [src]="pelicula.portada || 'assets/placeholder-image.png'" [alt]="pelicula.titulo" class="movie-poster">
+          <div class="movie-info">
+            <h2 class="movie-title">{{ pelicula.titulo }}</h2>
+            <span class="movie-genre">{{ pelicula.genero }}</span>
+            <span class="movie-year">{{ pelicula.anio_estreno | date: 'yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <img *ngIf="paginaActualEstrenos < totalPaginas - 1" src="recursos/flecha_derecha.png" alt="Avanzar" class="carousel-arrow right" (click)="avanzarEstrenos()">
+  </div>
+</div>
+
+<app-footer></app-footer>

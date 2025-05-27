@@ -1,0 +1,137 @@
+<app-navbar></app-navbar>
+<div class="movie-form-container">
+    <form (ngSubmit)="onSubmit()" #peliculaForm="ngForm" class="movie-form">
+        <h2 class="form-title">Añadir película</h2>
+
+        <div class="movie-view">
+            <h3 class="view-title">Detalles de la película</h3>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="movie-poster-container">
+                        <img [src]="nuevaPelicula.portada || 'assets/placeholder-image.png'"
+                            alt="Portada de la película" class="movie-poster" />
+                        <div class="upload-controls">
+                            <input type="file" id="portadaInput" (change)="onFileSelected($event)" accept="image/*"
+                                style="display: none;" />
+                            <button type="button" class="btn btn-outline-secondary" (click)="triggerFileInput()">
+                                <i class="bi bi-upload"></i> Seleccionar Imagen
+                            </button>
+                            <small class="text-muted d-block mt-2">o ingresa una URL</small>
+                            <input type="text" id="portada" name="portada" class="form-control mt-2"
+                                placeholder="URL de la portada" [(ngModel)]="nuevaPelicula.portada" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="movie-details">
+                        <!-- Campo Título -->
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" id="titulo" name="titulo" class="form-control"
+                                placeholder="Ej: El Padrino" [(ngModel)]="nuevaPelicula.titulo" required />
+                            <small class="text-danger" *ngIf="errores['titulo']">{{ errores['titulo'] }}</small>
+                        </div>
+
+                        <!-- Campo Año de Estreno -->
+                        <div class="form-group">
+                            <label for="anio_estreno">Fecha de Estreno</label>
+                            <input type="text" id="anio_estreno" name="anio_estreno" class="form-control"
+                                placeholder="Ej: 2025-02-25" [(ngModel)]="nuevaPelicula.anio_estreno" required />
+                            <small class="text-danger" *ngIf="errores['anio_estreno']">{{ errores['anio_estreno'] }}</small>
+                        </div>
+
+                        <!-- Campo Género -->
+                        <div class="form-group">
+                            <label for="genero">Género</label>
+                            <select class="form-control" id="genero" [(ngModel)]="nuevaPelicula.genero" name="genero"
+                                required>
+                                <option selected disabled value="">Seleccione un género</option>
+                                <option value="terror">Terror</option>
+                                <option value="accion">Acción</option>
+                                <option value="comedia">Comedia</option>
+                                <option value="drama">Drama</option>
+                                <option value="ciencia ficcion">Ciencia Ficción</option>
+                                <option value="fantasia">Fantasía</option>
+                                <option value="romance">Romance</option>
+                            </select>
+                            <small class="text-danger" *ngIf="errores['genero']">{{ errores['genero'] }}</small>
+                        </div>
+
+                        <!-- Campo Descripción -->
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control"
+                                placeholder="Sinopsis de la película" rows="3"
+                                [(ngModel)]="nuevaPelicula.descripcion"></textarea>
+                            <small class="text-danger" *ngIf="errores['descripcion']">{{ errores['descripcion'] }}</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="director">Director</label>
+                                    <input type="text" id="director" name="director" class="form-control"
+                                        placeholder="Ej: Francis Ford Coppola" [(ngModel)]="nuevaPelicula.director" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="duracion">Duración</label>
+                                    <input type="text" id="duracion" name="duracion" class="form-control"
+                                        placeholder="Minutos (Ej: 175)" [(ngModel)]="nuevaPelicula.duracion" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="trailer">URL del Trailer</label>
+                            <input type="text" id="trailer" name="trailer" class="form-control"
+                                placeholder="https://www.youtube.com/watch?v=..." [(ngModel)]="nuevaPelicula.trailer" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <!-- Botón Guardar Película -->
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i> Guardar Película
+                </button>
+
+                <!-- Botón Borrar Datos -->
+                <button type="button" class="btn btn-danger" (click)="borrarDatos()">
+                    <i class="bi bi-x-circle"></i> Borrar Datos
+                </button>
+            </div>
+            <div class="links-section" *ngIf="mostrarEnlaces">
+                <h4><i class="bi bi-link-45deg"></i> Enlaces de visualización</h4>
+                <div class="link-form">
+                    <div class="row g-2">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="URL del enlace"
+                                [(ngModel)]="nuevoEnlace.url" name="urlEnlace" />
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" [(ngModel)]="nuevoEnlace.plataforma" name="plataformaEnlace">
+                                <option selected disabled value="">Plataforma</option>
+                                <option value="Netflix">Netflix</option>
+                                <option value="Amazon">Amazon Prime</option>
+                                <option value="Disney">Disney+</option>
+                                <option value="HBO">HBO Max</option>
+                                <option value="Movistar">Movistar+</option>
+                                <option value="otro">otro</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-primary" (click)="agregarEnlace()">
+                                <i class="bi bi-plus-circle"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<app-footer></app-footer>

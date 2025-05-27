@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<div class="messages-container">
+  <h2 class="section-title">Mensajes de Contacto</h2>
+  
+  <div class="messages-list">
+    <div class="message-card" *ngFor="let message of messages">
+      <div class="message-header">
+        <div class="sender-info">
+          <span class="sender-name">{{message.nombre}}</span>
+          <span class="sender-email">{{message.email}}</span>
+        </div>
+        <div class="message-meta">
+          <span class="message-date">{{message.fecha | date:'medium'}}</span>
+          <span class="message-subject">{{message.asunto}}</span>
+        </div>
+      </div>
+      <div class="message-content">
+        {{message.contenido}}
+      </div>
+    </div>
+    
+    <div class="empty-state" *ngIf="messages.length === 0">
+      <p>No hay mensajes disponibles</p>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

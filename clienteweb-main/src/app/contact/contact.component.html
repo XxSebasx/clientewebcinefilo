@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+
+<div class="contact-container">
+  <h1 class="contact-title">Contacta con nosotros</h1>
+  
+  <div class="contact-info">
+    <div class="contact-method">
+      <i class="bi bi-telephone"></i>
+      <h2>+34 640 24 99 66</h2>
+    </div>
+    <div class="contact-method">
+      <i class="bi bi-envelope"></i>
+      <h2>{{'elRinconDelCinefilo@gmail.com'}}</h2>
+    </div>
+  </div>
+  
+  <div class="contact-content">
+    <form class="contact-form" (ngSubmit)="enviarFormulario()" #contactForm="ngForm">
+      <div class="form-group">
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          class="form-control"
+          placeholder="Nombre"
+          [(ngModel)]="contacto.nombre"
+          required
+        />
+      </div>
+      
+      <div class="form-group">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Email"
+          [(ngModel)]="contacto.email"
+          required
+        />
+      </div>
+      
+      <div class="form-group">
+        <input
+          type="text"
+          id="asunto"
+          name="asunto"
+          class="form-control"
+          placeholder="Asunto"
+          [(ngModel)]="contacto.asunto"
+          required
+        />
+      </div>
+      
+      <div class="form-group">
+        <textarea
+          id="contenido"
+          name="contenido"
+          class="form-control"
+          placeholder="Mensaje"
+          [(ngModel)]="contacto.contenido"
+          required
+        ></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="enviando">
+          <span *ngIf="!enviando">Enviar</span>
+          <span *ngIf="enviando">Enviando...</span>
+        </button>
+        <button type="reset" class="btn btn-secondary">Limpiar</button>
+      </div>
+    </form>
+    
+    <div class="contact-image">
+      <img src="recursos/contacto-icono.png" alt="Contacto" />
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

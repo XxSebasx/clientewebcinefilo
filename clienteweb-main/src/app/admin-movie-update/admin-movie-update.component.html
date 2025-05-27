@@ -1,0 +1,218 @@
+<app-navbar></app-navbar>
+
+<div class="movie-container">
+  <!-- Barra de búsqueda -->
+  <div class="search-container">
+    <input 
+      type="text" 
+      id="buscar" 
+      class="search-input" 
+      placeholder="Buscar película por título" 
+      [(ngModel)]="buscarPelicula"
+      (keyup.enter)="buscarPeliculas()"
+    >
+    <button
+      type="button"
+      class="search-btn"
+      (click)="buscarPeliculas()"
+    >
+      Buscar
+    </button>
+  </div>
+  
+  <!-- Listado de películas -->
+  <div class="movies-grid" *ngIf="!mostrarVistaPelicula">
+    <div
+      class="movie-card"
+      *ngFor="let pelicula of peliculas"
+      (click)="seleccionarPelicula(pelicula)"
+    >
+      <img 
+        [src]="pelicula.portada || 'assets/placeholder-image.png'" 
+        alt="Poster de {{pelicula.titulo}}" 
+        class="movie-poster" 
+      />
+      <div class="movie-info">
+        <p class="movie-title">{{ pelicula.titulo }}</p>
+        <p class="movie-year">{{ pelicula.anio_estreno | date: 'yyyy' }}</p>
+        <p class="movie-genre">{{ pelicula.genero }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Vista de película -->
+  <div class="movie-view" *ngIf="mostrarVistaPelicula">
+    <h2>Detalles de la Película</h2>
+
+    <div class="form-group">
+      <label for="tituloVista">Título</label>
+      <input
+        type="text"
+        id="tituloVista"
+        class="form-control"
+        placeholder="Título"
+        [(ngModel)]="nuevaPelicula.titulo"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="anioVista">Año de Estreno</label>
+      <input
+        type="text"
+        id="anioVista"
+        class="form-control"
+        placeholder="Ej: 2025-02-25"
+        [(ngModel)]="nuevaPelicula.anio_estreno"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="generoVista">Género</label>
+      <select
+        id="generoVista"
+        class="form-control"
+        [(ngModel)]="nuevaPelicula.genero"
+      >
+        <option *ngFor="let genero of generos" [value]="genero">
+          {{ genero | titlecase }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        class="form-control"
+        placeholder="Descripción"
+        [(ngModel)]="nuevaPelicula.descripcion"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="director">Director</label>
+          <input
+            type="text"
+            id="director"
+            class="form-control"
+            placeholder="Director"
+            [(ngModel)]="nuevaPelicula.director"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="duracion">Duración (en minutos)</label>
+          <input
+            type="text"
+            id="duracion"
+            class="form-control"
+            placeholder="Duración (en minutos)"
+            [(ngModel)]="nuevaPelicula.duracion"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de imagen -->
+    <div class="image-upload">
+      <img
+        [src]="nuevaPelicula.portada || 'assets/placeholder-image.png'"
+        alt="Portada de la película"
+        class="image-preview"
+      />
+      <p class="text-muted">Agregar imagen de portada</p>
+      <input
+        type="file"
+        id="portadaInput"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        style="display: none;"
+      />
+      <button
+        type="button"
+        class="upload-btn"
+        (click)="triggerFileInput()"
+      >
+        Seleccionar Imagen
+      </button>
+    </div>
+
+    <div class="form-group">
+      <label for="portada">URL de la portada</label>
+      <input
+        type="text"
+        id="portada"
+        class="form-control"
+        placeholder="URL de la portada"
+        [(ngModel)]="nuevaPelicula.portada"
+      />
+    </div>
+
+    <!-- Input invisible para la URL del trailer -->
+    <input
+      type="hidden"
+      id="trailer"
+      [(ngModel)]="nuevaPelicula.trailer"
+    />
+
+    <!-- Botón para guardar -->
+    <button
+      type="submit"
+      class="action-btn update-movie-btn"
+      (click)="actualizarPelicula()"
+    >
+      Actualizar datos
+    </button>
+
+    <!-- Botón para eliminar -->
+    <button
+      type="button"
+      class="action-btn delete-movie-btn"
+      (click)="eliminarPelicula()"
+    >
+      Eliminar Película
+    </button>
+
+    <!-- Sección de enlaces -->
+    <div class="links-section">
+      <h3><i class="bi bi-link-45deg"></i> Enlaces</h3>
+      <div class="link-form">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="URL del enlace"
+          [(ngModel)]="nuevoEnlace.url"
+          name="urlEnlace"
+        />
+
+        <select
+          class="form-select"
+          [(ngModel)]="nuevoEnlace.plataforma"
+          name="plataformaEnlace"
+          (change)="mostrarEnlacePorPlataforma()"
+        >
+          <option selected disabled value="">Selecciona plataforma</option>
+          <option value="Netflix">Netflix</option>
+          <option value="Amazon">Amazon Prime</option>
+          <option value="Disney">Disney+</option>
+          <option value="HBO">HBO Max</option>
+          <option value="Movistar">Movistar+</option>
+          <option value="otro">Otro</option>
+        </select>
+
+        <button
+          class="action-btn update-link-btn"
+          (click)="actualizarEnlace()"
+        >
+          Actualizar Enlace
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,122 @@
+/* Estilos base */
+.admin-dashboard {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: calc(100vh - 120px);
+  background-color: #121212;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2.4rem; /* ligeramente más grande */
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Grid de opciones */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* AUMENTADO de 250px a 300px */
+  gap: 2rem; /* más separación entre cartas */
+  padding: 0 1rem;
+}
+
+/* Tarjetas */
+.dashboard-card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 2rem; /* más padding */
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  border-color: #e70d0d;
+}
+
+.card-icon {
+  width: 100px; /* más grande */
+  height: 100px;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.dashboard-card h2 {
+  margin: 0.7rem 0;
+  font-size: 1.5rem; /* más grande */
+  color: #ffffff;
+}
+
+.dashboard-card p {
+  margin: 0;
+  color: #aaa;
+  font-size: 1rem; /* ligeramente más grande */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1.5rem;
+  }
+
+  .dashboard-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-card {
+    padding: 1.7rem;
+  }
+
+  .card-icon {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    padding: 1.5rem;
+  }
+
+  .card-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .dashboard-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .dashboard-card p {
+    font-size: 0.95rem;
+  }
+}

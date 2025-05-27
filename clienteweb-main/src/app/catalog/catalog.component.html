@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+
+<div class="catalog-container">
+  <!-- Filtros ajustados -->
+  <div id="filtros">
+    <!-- <img src="recursos/filtros_icono.png" alt="icono-filtro" class="img-fluid" id="filtroIcon" /> -->
+    <p id="todo" (click)="obtenerPeliculas()">Todo</p>
+    <p id="populares" (click)="obtenerPeliculasPopulares()">Populares</p>
+    <p id="valoradas" (click)="obtenerPeliculasValoradas()">Mejor valoradas</p>
+    <p id="estrenos" (click)="obtenerPeliculasEstrenos()">Estrenos</p>
+    <select class="form-select compact-select" (change)="onGeneroChange($event)">
+      <option selected>Genero</option>
+      <option value="accion">Acción</option>
+      <option value="terror">Terror</option>
+      <option value="ciencia ficcion">Ciencia ficción</option>
+      <option value="drama">Drama</option>
+      <option value="comedia">Comedia</option>
+      <option value="romance">Romance</option>
+    </select>
+    <select class="form-select compact-select" (change)="onAnioChange($event)">
+      <option selected>Año</option>
+      <option value="2">2020-2025</option>
+      <option value="3">2010-2019</option>
+      <option value="4">2000-2009</option>
+      <option value="5">1990-1999</option>
+      <option value="6">1980-1989</option>
+      <option value="7">1970-1979</option>
+      <option value="8">1960-1969</option>
+      <option value="9">1950-1959</option>
+      <option value="10">1940-1949</option>
+      <option value="11">1930-1939</option>
+    </select>
+  </div>
+
+  <!-- Mensaje si no hay películas -->
+  <h2 *ngIf="peliculas.length === 0" style="color: #fff; text-align: center; margin: 3rem 0; font-size: 2.5rem;">
+    No se encontraron películas
+  </h2>
+
+  <!-- Grid de películas -->
+  <div class="movies-grid" *ngIf="peliculas.length > 0">
+    <div class="movie-card" *ngFor="let pelicula of peliculas" (click)="verPelicula(pelicula.ID)">
+      <img [src]="pelicula.portada || 'assets/placeholder-image.png'" [alt]="pelicula.titulo" class="movie-poster">
+      <div class="movie-info">
+        <h2 class="movie-title">{{ pelicula.titulo }}</h2>
+        <span class="movie-genre">{{ pelicula.genero }}</span>
+        <span class="movie-year">{{ pelicula.anio_estreno | date: 'yyyy' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paginación con visibilidad condicional -->
+  <div class="pagination" *ngIf="peliculas.length > 0">
+    <button id="btnAnterior" *ngIf="paginaActual > 1" (click)="paginaAnterior()">
+      Pasar a la anterior pagina <div id="pagina_anterior">{{ paginaActual - 1 }}</div>
+    </button>
+    <span class="page-indicator">Página {{ paginaActual }}</span>
+    <button id="btnSiguiente" *ngIf="paginaActual * peliculasPorPagina < todasLasPeliculas.length" (click)="paginaSiguiente()">
+      Pasar a la siguiente pagina 
+    </button>
+  </div>
+</div>
+
+<app-footer></app-footer>

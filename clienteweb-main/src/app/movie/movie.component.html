@@ -1,0 +1,149 @@
+<app-navbar></app-navbar>
+
+<div class="movie-detail-container">
+  <div class="movie-main-content">
+    <!-- Columna izquierda - Poster grande -->
+    <div class="movie-poster-column">
+      <div class="movie-poster-container">
+        <img [src]="pelicula?.portada || 'assets/placeholder-movie.png'" [alt]="pelicula?.titulo"
+          class="movie-poster" />
+        <div class="movie-rating">
+          <span class="rating-value">{{ pelicula?.valoracion || 'N/A' }}</span>
+          <span class="rating-max">/5</span>
+          <img src="recursos/star.png" alt="Rating" class="rating-star">
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha - Información y enlaces -->
+    <div class="movie-info-column">
+      <h1 class="movie-title">{{ pelicula?.titulo }}</h1>
+
+      <div class="movie-meta">
+        <span class="movie-genre">{{ pelicula?.genero }}</span>
+        <span class="movie-year">{{ pelicula?.anio_estreno | date:'yyyy' }}</span>
+        <span class="movie-director">Dir. {{ pelicula?.director }}</span>
+      </div>
+
+      <div class="movie-synopsis">
+        <h3>Sinopsis</h3>
+        <p>{{ pelicula?.descripcion || 'No hay sinopsis disponible' }}</p>
+      </div>
+
+      <!-- Sección de trailer más pequeño -->
+      <div class="movie-trailer-section" *ngIf="pelicula?.trailer">
+        <h3>Tráiler</h3>
+        <div class="compact-trailer">
+          <iframe [src]="pelicula.trailer | safeUrl" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- Sección de enlaces -->
+      <div class="movie-platforms" *ngIf="enlaces.length > 0">
+        <h3>Disponible en</h3>
+        <div class="platforms-list">
+          <a *ngFor="let enlace of enlaces" [href]="enlace.url" target="_blank" class="platform-link"
+            [style.backgroundColor]="getBackgroundColor(enlace.plataforma)">
+            <img [src]="getLogo(enlace.plataforma)" [alt]="enlace.plataforma" class="platform-logo" />
+            <span>Ver en {{ enlace.plataforma }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Sección de comentarios (sin cambios) -->
+  <div class="movie-comments">
+    <h3>Comentarios</h3>
+
+    <div class="comment-form" *ngIf="usuario">
+      <textarea id="comentario" placeholder="Escribe tu opinión sobre esta película..." rows="3"></textarea>
+      <div class="comment-controls">
+        <div class="rating-control">
+          <label>Valoración:</label>
+          <select id="calificacion">
+            <option value="1">1 ★</option>
+            <option value="2">2 ★★</option>
+            <option value="3" selected>3 ★★★</option>
+            <option value="4">4 ★★★★</option>
+            <option value="5">5 ★★★★★</option>
+          </select>
+        </div>
+        <button class="submit-btn" (click)="crearComentario()">
+          Enviar <i class="bi bi-send"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="auth-prompt" *ngIf="!usuario">
+      <p>Inicia sesión para dejar tu comentario</p>
+      <div class="auth-buttons">
+        <button class="login-btn" (click)="irALogin()">Iniciar sesión</button>
+        <button class="register-btn" (click)="irARegistro()">Registrarse</button>
+      </div>
+    </div>
+
+    <div class="comments-list">
+      <div class="comment-card" *ngFor="let comentario of comentarios">
+        <div class="comment-header">
+          <img [src]="comentario.Usuario?.imagenPerfil || 'assets/default-profile.png'" alt="Avatar" class="user-avatar"
+            (click)="verPerfil(comentario.Usuario)" />
+          <div class="user-info">
+            <span class="username">{{ comentario.Usuario?.nombre || 'Usuario' }}</span>
+            <div class="user-rating">
+              <span>{{ comentario.valoracion }}</span>
+              <img src="recursos/star.png" alt="Estrella" class="star-icon">
+            </div>
+          </div>
+        </div>
+        <div class="comment-content">
+          <p>{{ comentario.texto }}</p>
+                    <!-- En la parte del template donde está el botón de borrar -->
+          <button *ngIf="usuario?.rol === 'admin'" class="delete-btn" (click)="eliminarComentario(comentario.ID)">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+          <button class="report-btn" (click)="abrirModalReporte(comentario.ID)">
+            <i class="bi bi-flag"></i> Reportar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para reportar comentario -->
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3>Reportar comentario</h3>
+      <button class="close-btn" (click)="cerrarModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <textarea [(ngModel)]="motivoReporte" placeholder="¿Por qué deseas reportar este comentario?" rows="4"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="cerrarModal()">Cancelar</button>
+      <button class="submit-btn" (click)="enviarReporte()">Enviar reporte</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para usuarios no autenticados -->
+<div class="modal-overlay" *ngIf="mostrarModalSesion">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h3>Acción requerida</h3>
+      <button class="close-btn" (click)="cerrarModalSesion()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Debes iniciar sesión para reportar comentarios</p>
+    </div>
+    <div class="modal-footer">
+      <button class="login-btn" (click)="irALogin()">Iniciar sesión</button>
+      <button class="register-btn" (click)="irARegistro()">Registrarse</button>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
